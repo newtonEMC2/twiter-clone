@@ -1,0 +1,28 @@
+version: "3.5"
+services:
+  front-dev:
+    container_name: front
+    build: .
+    depends_on:
+      - "mongo"
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      CHOKIDAR_USEPOLLING: 1
+      DISABLE_ESLINT_PLUGIN: 1
+      NODE_ENV: "development"
+
+  mongo:
+    container_name: mongo
+    build:
+      context: ./api-server
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./api-server:/app
+      - /app/node_modules
+    restart: always

@@ -1,25 +1,15 @@
-import logo from './logo.svg';
-import './App.css';
+import { createCommentUseCase } from "./dashboard/application/comment/createCommentUseCase";
+import { getAllCommentsUseCase } from "./dashboard/application/comment/getAllCommentsUseCase";
+import { commentsRepository } from "./dashboard/domain/comment/comment.repository";
+import { Dashboard } from "./dashboard/infrastructure/views/dashboard/dashboard.view";
+
+const DashboardInstance = Dashboard({
+  getAllCommentsUseCase: getAllCommentsUseCase({ commentsRepository }),
+  createCommentUseCase: createCommentUseCase({ commentsRepository }),
+});
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  return <DashboardInstance></DashboardInstance>;
 }
 
 export default App;
