@@ -1,8 +1,8 @@
 const getAllCommentsUseCase =
-  ({ commentsRepository }) =>
-  async () => {
+  ({ commentsRepository, commentsStore }) =>
+  async ({ dispatch }) => {
     const comments = await commentsRepository.getAllComments().catch();
-    return comments;
+    dispatch(commentsStore.initComments({ comments }));
   };
 
 export { getAllCommentsUseCase };

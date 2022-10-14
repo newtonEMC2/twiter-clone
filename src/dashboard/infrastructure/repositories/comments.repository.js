@@ -17,12 +17,12 @@ const CommentsRepository = {
 
   createComment: async ({ content, author }) => {
     try {
-      return await post({
+      const comment = CommentService().createComment({ content, author });
+      await post({
         url: `${SERVER_URI}/comments`,
-        data: JSON.stringify(
-          CommentService().createComment({ content, author })
-        ),
+        data: JSON.stringify(comment),
       });
+      return comment;
     } catch (error) {
       console.log(error);
     }

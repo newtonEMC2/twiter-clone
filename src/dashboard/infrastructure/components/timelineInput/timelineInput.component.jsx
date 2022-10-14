@@ -1,4 +1,5 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import {
   Form,
   InputField,
@@ -6,10 +7,11 @@ import {
 } from "../../../../shared/infrastructure/components/core/Form/Form.component";
 
 export const TimelineInput = ({ createCommentUseCase }) => {
+  const dispatch = useDispatch();
   return (
     <Form
       onSubmit={(data) => {
-        createCommentUseCase({ content: data.content });
+        createCommentUseCase({ content: data.content, dispatch });
       }}
     >
       {(formData, setFormData) => (
