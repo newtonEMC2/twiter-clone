@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 export const useUsers = ({ getFollowingUsersUseCase }) => {
-  const [users, setUsers] = useState([]);
+  const dispatch = useDispatch();
+  const users = useSelector((state) => state.users);
   useEffect(() => {
-    getFollowingUsersUseCase().then(setUsers);
-  }, [getFollowingUsersUseCase]);
+    getFollowingUsersUseCase({ dispatch });
+  }, [getFollowingUsersUseCase, dispatch]);
 
   return [users];
 };

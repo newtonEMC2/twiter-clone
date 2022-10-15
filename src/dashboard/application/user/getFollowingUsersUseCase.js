@@ -1,8 +1,8 @@
 const getFollowingUsersUseCase =
-  ({ usersRepository }) =>
-  async () => {
-    const followingUsers = await usersRepository.getFollowingUsers().catch();
-    return followingUsers;
+  ({ usersRepository, usersStore }) =>
+  async ({ dispatch }) => {
+    const users = await usersRepository.getFollowingUsers().catch();
+    dispatch(usersStore.initUsers({ users }));
   };
 
 export { getFollowingUsersUseCase };

@@ -1,8 +1,10 @@
 import { createStore, compose, combineReducers, applyMiddleware } from "redux";
 import { commentsReducer, commentsMiddl } from "./comments.slice";
+import { usersReducer } from "./users.slice";
 
 const rootReducer = combineReducers({
   comments: commentsReducer,
+  users: usersReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
