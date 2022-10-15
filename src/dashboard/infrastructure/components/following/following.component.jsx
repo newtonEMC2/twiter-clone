@@ -5,10 +5,10 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
 import { Button, Typography } from "@mui/material";
-import { useUsers } from "./useUsers";
+import { useUsers } from "../../hooks/useUsers";
 
 export const Following = ({ getFollowingUsersUseCase }) => {
-  const [users] = useUsers({ getFollowingUsersUseCase });
+  const [users] = useUsers({ useCase: getFollowingUsersUseCase });
 
   return (
     <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
