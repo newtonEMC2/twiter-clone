@@ -4,7 +4,8 @@ services:
     container_name: front
     build: .
     depends_on:
-      - "mongo"
+      - "comments"
+      - "users"
     ports:
       - "3000:3000"
     volumes:
@@ -15,8 +16,8 @@ services:
       DISABLE_ESLINT_PLUGIN: 1
       NODE_ENV: "development"
 
-  mongo:
-    container_name: mongo
+  comments:
+    container_name: comments
     build:
       context: ./api-server
       dockerfile: Dockerfile
@@ -24,5 +25,17 @@ services:
       - "3001:3001"
     volumes:
       - ./api-server:/app
+      - /app/node_modules
+    restart: always
+
+  users:
+    container_name: users
+    build:
+      context: ./api-server-users
+      dockerfile: Dockerfile
+    ports:
+      - "3002:3001"
+    volumes:
+      - ./api-server-users:/app
       - /app/node_modules
     restart: always

@@ -2,9 +2,10 @@ import React from "react";
 import Grid from "@mui/material/Grid";
 import { TimelineInput } from "../../components/timelineInput/timelineInput.component";
 import { useComments } from "../../hooks/useComments";
+import { Following } from "../../components/following/following.component";
 
 export const Dashboard =
-  ({ getAllCommentsUseCase, createCommentUseCase }) =>
+  ({ getAllCommentsUseCase, createCommentUseCase, getFollowingUsersUseCase }) =>
   () => {
     const [comments] = useComments({ getAllCommentsUseCase });
 
@@ -13,7 +14,9 @@ export const Dashboard =
         <Grid xs item container>
           <Grid item xs={3} container direction="column">
             <Grid item xs>
-              Following
+              <Following
+                getFollowingUsersUseCase={getFollowingUsersUseCase}
+              ></Following>
             </Grid>
             <Grid item xs>
               Follow

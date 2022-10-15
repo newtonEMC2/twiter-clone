@@ -6,6 +6,6 @@ if (NODE_ENV === "development") {
   config = devConfig;
 }
 
-const { SERVER_URI } = config;
+const { COMMENTS_SERVER_URI, USERS_SERVER_URI } = config;
 
-export { SERVER_URI };
+export { COMMENTS_SERVER_URI, USERS_SERVER_URI };
