@@ -4,6 +4,7 @@ import { getAllCommentsUseCase } from "../../../application/comment/getAllCommen
 import { createCommentUseCase } from "../../../application/comment/createCommentUseCase";
 import { getFollowingUsersUseCase } from "../../../application/user/getFollowingUsersUseCase";
 import { commentsStore } from "../../../domain/comment/comment.store";
+import { usersStore } from "../../../domain/user/user.store";
 import { Dashboard } from "./dashboard.view";
 import { store } from "../../../infrastructure/store/store";
 
@@ -27,6 +28,7 @@ const DashboardInstance = Dashboard({
   }),
   getFollowingUsersUseCase: getFollowingUsersUseCase({
     usersRepository,
+    usersStore,
   }),
 });
 
