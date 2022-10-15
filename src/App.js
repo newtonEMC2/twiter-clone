@@ -6,6 +6,7 @@ import { commentsStore } from "./dashboard/domain/comment/comment.store";
 import { usersStore } from "./dashboard/domain/user/user.store";
 import { usersRepository } from "./dashboard/domain/user/user.repository";
 import { Dashboard } from "./dashboard/infrastructure/views/dashboard/dashboard.view";
+import { getUsersToFollowUseCase } from "./dashboard/application/user/getUsersToFollowUseCase";
 
 const DashboardInstance = Dashboard({
   getAllCommentsUseCase: getAllCommentsUseCase({
@@ -19,6 +20,9 @@ const DashboardInstance = Dashboard({
   getFollowingUsersUseCase: getFollowingUsersUseCase({
     usersRepository,
     usersStore,
+  }),
+  getUsersToFollowUseCase: getUsersToFollowUseCase({
+    usersRepository,
   }),
 });
 

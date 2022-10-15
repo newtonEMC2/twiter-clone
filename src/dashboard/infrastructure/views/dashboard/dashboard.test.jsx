@@ -3,6 +3,7 @@ import { Provider } from "react-redux";
 import { getAllCommentsUseCase } from "../../../application/comment/getAllCommentsUseCase";
 import { createCommentUseCase } from "../../../application/comment/createCommentUseCase";
 import { getFollowingUsersUseCase } from "../../../application/user/getFollowingUsersUseCase";
+import { getUsersToFollowUseCase } from "../../../application/user/getUsersToFollowUseCase";
 import { commentsStore } from "../../../domain/comment/comment.store";
 import { usersStore } from "../../../domain/user/user.store";
 import { Dashboard } from "./dashboard.view";
@@ -14,7 +15,8 @@ const commentsRepository = {
 };
 
 const usersRepository = {
-  getFollowingUsers: () => Promise.resolve([{ name: "::username::" }]),
+  getFollowingUsers: () => Promise.resolve([{ name: "::followinguser::" }]),
+  getUsersToFollow: () => Promise.resolve([{ name: "::usertofollow::" }]),
 };
 
 const DashboardInstance = Dashboard({
@@ -27,6 +29,10 @@ const DashboardInstance = Dashboard({
     commentsStore,
   }),
   getFollowingUsersUseCase: getFollowingUsersUseCase({
+    usersRepository,
+    usersStore,
+  }),
+  getUsersToFollowUseCase: getUsersToFollowUseCase({
     usersRepository,
     usersStore,
   }),
@@ -66,7 +72,12 @@ describe("Dashboard view", () => {
   describe("When following users loads", () => {
     it("should retrieve and display users that we follow", async () => {
       render(<DashboardWrapped></DashboardWrapped>);
-      const user = await screen.findByText(/::username::/);
+      const user = await screen.findByText(/::followinguser::/);
+      expect(user).toBeInTheDocument();
+    });
+    it("should retrieve and display users that we don't follow", async () => {
+      render(<DashboardWrapped></DashboardWrapped>);
+      const user = await screen.findByText(/::usertofollow::/);
       expect(user).toBeInTheDocument();
     });
   });

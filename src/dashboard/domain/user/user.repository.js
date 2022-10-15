@@ -4,4 +4,7 @@ export const usersRepository = {
   getFollowingUsers: ({ id }) => {
     return ur.getFollowingUsers({ id });
   },
+  getUsersToFollow: ({ id }) => {
+    return ur.getUsersToFollow({ id });
+  },
 };
