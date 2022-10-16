@@ -41,6 +41,7 @@ const UsersRepository = {
           users: [],
         });
 
+      followingUsersIds.push(id);
       const query = followingUsersIds.map((id) => `id_ne=${id}`).join("&");
       let usersToFollow = await get({
         url: `${USERS_SERVER_URI}/users?${query}`,
