@@ -1,7 +1,8 @@
 const followUserUseCase =
-  ({ usersRepository }) =>
+  ({ usersRepository, UserService }) =>
   async ({ id, user }) => {
-    await usersRepository.followUser({ id, user }).catch();
+    const updatedUser = UserService().followUser({ id, user });
+    await usersRepository.followUser({ user: updatedUser }).catch();
   };
 
 export { followUserUseCase };

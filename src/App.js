@@ -9,6 +9,8 @@ import { Dashboard } from "./dashboard/infrastructure/views/dashboard/dashboard.
 import { getUsersToFollowUseCase } from "./dashboard/application/user/getUsersToFollowUseCase";
 import { getAuthenticatedUserUseCase } from "./dashboard/application/user/getAuthenticatedUserUseCase";
 import { followUserUseCase } from "./dashboard/application/user/followUserUseCase";
+import { unfollowUserUseCase } from "./dashboard/application/user/unfollowUserUseCase";
+import { UserService } from "./dashboard/domain/user/user.service";
 
 const DashboardInstance = Dashboard({
   getAllCommentsUseCase: getAllCommentsUseCase({
@@ -32,6 +34,11 @@ const DashboardInstance = Dashboard({
   }),
   followUserUseCase: followUserUseCase({
     usersRepository,
+    UserService,
+  }),
+  unfollowUserUseCase: unfollowUserUseCase({
+    usersRepository,
+    UserService,
   }),
 });
 

@@ -66,12 +66,11 @@ const UsersRepository = {
     }
   },
 
-  updateUser: async ({ id, user }) => {
+  updateUser: async ({ user }) => {
     try {
-      const updatedUser = UserService().followUser({ id, user });
       await put({
         url: `${USERS_SERVER_URI}/users/${user.id}`,
-        data: JSON.stringify(updatedUser),
+        data: JSON.stringify(user),
       });
     } catch (error) {
       console.log(error);

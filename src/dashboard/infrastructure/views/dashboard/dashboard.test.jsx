@@ -4,10 +4,14 @@ import { getAllCommentsUseCase } from "../../../application/comment/getAllCommen
 import { createCommentUseCase } from "../../../application/comment/createCommentUseCase";
 import { getFollowingUsersUseCase } from "../../../application/user/getFollowingUsersUseCase";
 import { getUsersToFollowUseCase } from "../../../application/user/getUsersToFollowUseCase";
+import { followUserUseCase } from "../../../application/user/followUserUseCase";
+import { unfollowUserUseCase } from "../../../application/user/unfollowUserUseCase";
+import { getAuthenticatedUserUseCase } from "../../../application/user/getAuthenticatedUserUseCase";
 import { commentsStore } from "../../../domain/comment/comment.store";
 import { usersStore } from "../../../domain/user/user.store";
 import { Dashboard } from "./dashboard.view";
 import { store } from "../../../infrastructure/store/store";
+import { UserService } from "../../../domain/user/user.service";
 
 const commentsRepository = {
   getAllComments: () => Promise.resolve([{ content: "::comment::" }]),
@@ -17,6 +21,8 @@ const commentsRepository = {
 const usersRepository = {
   getFollowingUsers: () => Promise.resolve([{ name: "::followinguser::" }]),
   getUsersToFollow: () => Promise.resolve([{ name: "::usertofollow::" }]),
+  getAuthenticatedUser: () =>
+    Promise.resolve([{ name: "::authenticatedUser::" }]),
 };
 
 const DashboardInstance = Dashboard({
@@ -35,6 +41,18 @@ const DashboardInstance = Dashboard({
   getUsersToFollowUseCase: getUsersToFollowUseCase({
     usersRepository,
     usersStore,
+  }),
+  getAuthenticatedUserUseCase: getAuthenticatedUserUseCase({
+    usersRepository,
+    usersStore,
+  }),
+  followUserUseCase: followUserUseCase({
+    usersRepository,
+    UserService,
+  }),
+  unfollowUserUseCase: unfollowUserUseCase({
+    usersRepository,
+    UserService,
   }),
 });
 

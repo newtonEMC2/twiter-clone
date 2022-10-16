@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -7,7 +8,11 @@ import Divider from "@mui/material/Divider";
 import { Button, Typography } from "@mui/material";
 import { useUsers } from "../../hooks/useUsers";
 
-export const Following = ({ getFollowingUsersUseCase }) => {
+export const Following = ({
+  getFollowingUsersUseCase,
+  unfollowUserUseCase,
+}) => {
+  const authenticatedUser = useSelector((state) => state.auth);
   const [users] = useUsers({ useCase: getFollowingUsersUseCase });
 
   return (
@@ -18,7 +23,13 @@ export const Following = ({ getFollowingUsersUseCase }) => {
           <div key={user.id}>
             <ListItemButton selected onClick={(event) => {}}>
               <ListItemText primary={user.name} />
-              <Button variant="contained" size="small">
+              <Button
+                variant="contained"
+                size="small"
+                onClick={() =>
+                  unfollowUserUseCase({ id: user.id, user: authenticatedUser })
+                }
+              >
                 unfollow
               </Button>
             </ListItemButton>

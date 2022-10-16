@@ -19,7 +19,14 @@ const UserService = () => {
     });
   };
 
-  return { getUsers, getUser, followUser };
+  const unfollowUser = ({ user, id }) => {
+    return User({
+      ...user,
+      following: user.following.filter((followingId) => followingId !== id),
+    });
+  };
+
+  return { getUsers, getUser, followUser, unfollowUser };
 };
 
 export { UserService };

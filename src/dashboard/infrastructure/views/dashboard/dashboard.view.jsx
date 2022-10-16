@@ -14,6 +14,7 @@ export const Dashboard =
     getUsersToFollowUseCase,
     getAuthenticatedUserUseCase,
     followUserUseCase,
+    unfollowUserUseCase,
   }) =>
   () => {
     useAuth({ useCase: getAuthenticatedUserUseCase });
@@ -25,6 +26,7 @@ export const Dashboard =
           <Grid item xs={3} container direction="column">
             <Grid item xs>
               <Following
+                unfollowUserUseCase={unfollowUserUseCase}
                 getFollowingUsersUseCase={getFollowingUsersUseCase}
               ></Following>
             </Grid>
