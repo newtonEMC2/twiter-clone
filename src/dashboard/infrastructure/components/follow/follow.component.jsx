@@ -14,7 +14,7 @@ export const Follow = ({ getUsersToFollowUseCase }) => {
 
   return (
     <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
-      <Typography variant="h6">following</Typography>
+      <Typography variant="h6">follow</Typography>
       <List component="nav" aria-label="main mailbox folders">
         {usersToFollow.map((user) => (
           <div key={user.id}>
