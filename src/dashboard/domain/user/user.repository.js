@@ -7,4 +7,7 @@ export const usersRepository = {
   getUsersToFollow: ({ id }) => {
     return ur.getUsersToFollow({ id });
   },
+  getAuthenticatedUser: ({ id }) => {
+    return ur.getUserById({ id });
+  },
 };

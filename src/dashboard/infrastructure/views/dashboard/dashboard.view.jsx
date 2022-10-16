@@ -4,6 +4,7 @@ import { TimelineInput } from "../../components/timelineInput/timelineInput.comp
 import { useComments } from "../../hooks/useComments";
 import { Following } from "../../components/following/following.component";
 import { Follow } from "../../components/follow/follow.component";
+import { useAuth } from "./useAuth";
 
 export const Dashboard =
   ({
@@ -11,8 +12,10 @@ export const Dashboard =
     createCommentUseCase,
     getFollowingUsersUseCase,
     getUsersToFollowUseCase,
+    getAuthenticatedUserUseCase,
   }) =>
   () => {
+    useAuth({ useCase: getAuthenticatedUserUseCase });
     const [comments] = useComments({ getAllCommentsUseCase });
 
     return (

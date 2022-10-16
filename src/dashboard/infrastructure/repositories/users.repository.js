@@ -54,6 +54,16 @@ const UsersRepository = {
       console.log(error);
     }
   },
+
+  getUserById: async ({ id }) => {
+    try {
+      let user = await get({ url: `${USERS_SERVER_URI}/users/${id}` });
+      user = await user.json();
+      return UserService().getUser({ user });
+    } catch (error) {
+      console.log(error);
+    }
+  },
 };
 
 export { UsersRepository };
