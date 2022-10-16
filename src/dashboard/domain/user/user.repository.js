@@ -10,4 +10,7 @@ export const usersRepository = {
   getAuthenticatedUser: ({ id }) => {
     return ur.getUserById({ id });
   },
+  followUser: ({ id, user }) => {
+    return ur.updateUser({ id, user });
+  },
 };

@@ -13,6 +13,7 @@ export const Dashboard =
     getFollowingUsersUseCase,
     getUsersToFollowUseCase,
     getAuthenticatedUserUseCase,
+    followUserUseCase,
   }) =>
   () => {
     useAuth({ useCase: getAuthenticatedUserUseCase });
@@ -30,6 +31,7 @@ export const Dashboard =
             <Grid item xs>
               <Follow
                 getUsersToFollowUseCase={getUsersToFollowUseCase}
+                followUserUseCase={followUserUseCase}
               ></Follow>
             </Grid>
           </Grid>

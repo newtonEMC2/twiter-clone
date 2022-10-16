@@ -8,6 +8,7 @@ import { usersRepository } from "./dashboard/domain/user/user.repository";
 import { Dashboard } from "./dashboard/infrastructure/views/dashboard/dashboard.view";
 import { getUsersToFollowUseCase } from "./dashboard/application/user/getUsersToFollowUseCase";
 import { getAuthenticatedUserUseCase } from "./dashboard/application/user/getAuthenticatedUserUseCase";
+import { followUserUseCase } from "./dashboard/application/user/followUserUseCase";
 
 const DashboardInstance = Dashboard({
   getAllCommentsUseCase: getAllCommentsUseCase({
@@ -28,6 +29,9 @@ const DashboardInstance = Dashboard({
   getAuthenticatedUserUseCase: getAuthenticatedUserUseCase({
     usersRepository,
     usersStore,
+  }),
+  followUserUseCase: followUserUseCase({
+    usersRepository,
   }),
 });
 

@@ -22,4 +22,18 @@ const post = async ({ url, data }) => {
   }
 };
 
-export { get, post };
+const put = async ({ url, data }) => {
+  try {
+    return await fetch(url, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { get, post, put };

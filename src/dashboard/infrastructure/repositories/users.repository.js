@@ -1,5 +1,5 @@
 import { USERS_SERVER_URI } from "../config";
-import { get } from "../../../shared/infrastructure/http/http";
+import { get, put } from "../../../shared/infrastructure/http/http";
 import { UserService } from "../../domain/user/user.service";
 
 const UsersRepository = {
@@ -60,6 +60,18 @@ const UsersRepository = {
       let user = await get({ url: `${USERS_SERVER_URI}/users/${id}` });
       user = await user.json();
       return UserService().getUser({ user });
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
+  updateUser: async ({ id, user }) => {
+    try {
+      const updatedUser = UserService().followUser({ id, user });
+      await put({
+        url: `${USERS_SERVER_URI}/users/${user.id}`,
+        data: JSON.stringify(updatedUser),
+      });
     } catch (error) {
       console.log(error);
     }
