@@ -54,6 +54,8 @@ const DashboardInstance = Dashboard({
     usersRepository,
     UserService,
   }),
+  usersStore,
+  commentsStore,
 });
 
 const DashboardWrapped = () => (

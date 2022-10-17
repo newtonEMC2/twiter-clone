@@ -1,8 +1,12 @@
 const followUserUseCase =
-  ({ usersRepository, UserService }) =>
-  async ({ id, user }) => {
-    const updatedUser = UserService().followUser({ id, user });
-    await usersRepository.followUser({ user: updatedUser }).catch();
+  ({ usersRepository, UserService, usersStore }) =>
+  async ({ userToFollow, loggedInUser, dispatch }) => {
+    const updatedLoggedUser = UserService().followUser({
+      id: userToFollow.id,
+      user: loggedInUser,
+    });
+    await usersRepository.followUser({ user: updatedLoggedUser }).catch();
+    dispatch(usersStore.setFollowingUsers({ id: userToFollow.id }));
   };
 
 export { followUserUseCase };

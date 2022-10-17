@@ -27,6 +27,7 @@ const DashboardInstance = Dashboard({
   }),
   getUsersToFollowUseCase: getUsersToFollowUseCase({
     usersRepository,
+    usersStore,
   }),
   getAuthenticatedUserUseCase: getAuthenticatedUserUseCase({
     usersRepository,
@@ -35,11 +36,15 @@ const DashboardInstance = Dashboard({
   followUserUseCase: followUserUseCase({
     usersRepository,
     UserService,
+    usersStore,
   }),
   unfollowUserUseCase: unfollowUserUseCase({
     usersRepository,
     UserService,
+    usersStore,
   }),
+  usersStore,
+  commentsStore,
 });
 
 function App() {

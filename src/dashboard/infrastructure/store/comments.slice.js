@@ -3,6 +3,8 @@ import { CommentService } from "../../domain/comment/comment.service";
 const SET_COMMENTS = "SET_COMMENTS";
 const UPDATE_COMMENTS = "UPDATE_COMMENTS";
 
+export const selectComments = (state) => state.comments;
+
 export const setCommentsAction = ({ payload }) => ({
   type: SET_COMMENTS,
   payload: CommentService().getComments({ comments: payload }),
@@ -15,10 +17,6 @@ export const updateCommentsAction = ({ payload }) => ({
     author: payload.author,
   }),
 });
-
-export const commentsMiddl = () => (next) => (action) => {
-  next(action);
-};
 
 export const commentsReducer = (state = [], action) => {
   switch (action.type) {

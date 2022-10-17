@@ -10,15 +10,15 @@ export const Dashboard =
   ({
     getAllCommentsUseCase,
     createCommentUseCase,
-    getFollowingUsersUseCase,
-    getUsersToFollowUseCase,
     getAuthenticatedUserUseCase,
     followUserUseCase,
     unfollowUserUseCase,
+    usersStore,
+    commentsStore,
   }) =>
   () => {
-    useAuth({ useCase: getAuthenticatedUserUseCase });
-    const [comments] = useComments({ getAllCommentsUseCase });
+    useAuth({ useCase: getAuthenticatedUserUseCase, usersStore });
+    const [comments] = useComments({ getAllCommentsUseCase, commentsStore });
 
     return (
       <Grid container direction="column" style={{ height: "100vh" }}>
@@ -27,13 +27,13 @@ export const Dashboard =
             <Grid item xs>
               <Following
                 unfollowUserUseCase={unfollowUserUseCase}
-                getFollowingUsersUseCase={getFollowingUsersUseCase}
+                usersStore={usersStore}
               ></Following>
             </Grid>
             <Grid item xs>
               <Follow
-                getUsersToFollowUseCase={getUsersToFollowUseCase}
                 followUserUseCase={followUserUseCase}
+                usersStore={usersStore}
               ></Follow>
             </Grid>
           </Grid>

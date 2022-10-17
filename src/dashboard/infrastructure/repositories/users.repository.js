@@ -3,54 +3,13 @@ import { get, put } from "../../../shared/infrastructure/http/http";
 import { UserService } from "../../domain/user/user.service";
 
 const UsersRepository = {
-  getFollowingUsers: async ({ id }) => {
+  getUsers: async ({ authenticatedUserId }) => {
     try {
-      let user = await get({ url: `${USERS_SERVER_URI}/users/${id}` });
-      user = await user.json();
-      if (!user) throw new Error("something went wrong");
-
-      const followingUsersIds = user.following;
-      if (!followingUsersIds?.length)
-        return UserService().getUsers({
-          users: [],
-        });
-
-      const query = followingUsersIds.map((id) => `id=${id}`).join("&");
-      let followingUsers = await get({
-        url: `${USERS_SERVER_URI}/users?${query}`,
+      let users = await get({
+        url: `${USERS_SERVER_URI}/users?id_ne=${authenticatedUserId}`,
       });
-      followingUsers = await followingUsers.json();
-
-      return UserService().getUsers({
-        users: followingUsers,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  },
-
-  getUsersToFollow: async ({ id }) => {
-    try {
-      let user = await get({ url: `${USERS_SERVER_URI}/users/${id}` });
-      user = await user.json();
-      if (!user) throw new Error("something went wrong");
-
-      const followingUsersIds = user.following;
-      if (!followingUsersIds?.length)
-        return UserService().getUsers({
-          users: [],
-        });
-
-      followingUsersIds.push(id);
-      const query = followingUsersIds.map((id) => `id_ne=${id}`).join("&");
-      let usersToFollow = await get({
-        url: `${USERS_SERVER_URI}/users?${query}`,
-      });
-      usersToFollow = await usersToFollow.json();
-
-      return UserService().getUsers({
-        users: usersToFollow,
-      });
+      users = await users.json();
+      return UserService().getUsers({ users });
     } catch (error) {
       console.log(error);
     }

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import React from "react";
+import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -7,13 +7,14 @@ import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
 import { Button, Typography } from "@mui/material";
 
-export const Follow = ({ getUsersToFollowUseCase, followUserUseCase }) => {
-  const [usersToFollow, setUsersToFollow] = useState([]);
-  const authenticatedUser = useSelector((state) => state.auth);
-
-  useEffect(() => {
-    getUsersToFollowUseCase().then(setUsersToFollow);
-  }, []);
+export const Follow = ({ followUserUseCase, usersStore }) => {
+  const dispatch = useDispatch();
+  const authenticatedUser = useSelector(
+    usersStore.selectAuthenticatedUser,
+    shallowEqual
+  );
+  const usersToFollow =
+    useSelector(usersStore.selectUsersToFollow, shallowEqual) || [];
 
   return (
     <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
@@ -27,7 +28,11 @@ export const Follow = ({ getUsersToFollowUseCase, followUserUseCase }) => {
                 variant="contained"
                 size="small"
                 onClick={() =>
-                  followUserUseCase({ id: user.id, user: authenticatedUser })
+                  followUserUseCase({
+                    userToFollow: user,
+                    loggedInUser: authenticatedUser,
+                    dispatch,
+                  })
                 }
               >
                 follow

@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-export const useComments = ({ getAllCommentsUseCase }) => {
+export const useComments = ({ getAllCommentsUseCase, commentsStore }) => {
   const dispatch = useDispatch();
-  const comments = useSelector((state) => state.comments);
+  const comments = useSelector(commentsStore.selectComments);
   useEffect(() => {
     getAllCommentsUseCase({ dispatch });
   }, [getAllCommentsUseCase, dispatch]);

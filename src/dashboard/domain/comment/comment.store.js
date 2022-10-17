@@ -1,6 +1,7 @@
 import {
   setCommentsAction,
   updateCommentsAction,
+  selectComments,
 } from "../../infrastructure/store/comments.slice";
 
 export const commentsStore = {
@@ -10,4 +11,5 @@ export const commentsStore = {
   updateComments: ({ comment }) => {
     return updateCommentsAction({ payload: comment });
   },
+  selectComments,
 };
