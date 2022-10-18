@@ -19,7 +19,6 @@ const CommentsRepository = {
   createComment: async ({ content, author }) => {
     try {
       const user = UserService().getUser({ user: author });
-      console.log(user);
       const comment = CommentService().createComment({ content, author: user });
       await post({
         url: `${COMMENTS_SERVER_URI}/comments`,

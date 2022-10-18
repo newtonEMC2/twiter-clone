@@ -1,14 +1,15 @@
-import {
-  setUsersAction,
-  selectFollowingUsers,
-  selectUsersToFollow,
-} from "../../infrastructure/store/users.slice";
+import { setUsersAction } from "../../infrastructure/store/users.slice";
 import {
   setAuthenticatedUserAction,
-  selectAuthenticatedUser,
   addFollowingUserAction,
   removeFollowingUserAction,
 } from "../../infrastructure/store/auth.slice";
+import {
+  selectFollowingUsers,
+  selectUsersToFollow,
+} from "../../infrastructure/store/selectors";
+
+import { selectAuthenticatedUser } from "../../infrastructure/store/selectors";
 
 export const usersStore = {
   setUsers: ({ users }) => {

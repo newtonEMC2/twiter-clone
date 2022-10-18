@@ -6,8 +6,6 @@ const SET_INIT = "SET_INIT";
 const FOLLOW_USER = "FOLLOW_USER";
 const UNFOLLOW_USER = "UNFOLLOW_USER";
 
-export const selectAuthenticatedUser = (state) => state.auth;
-
 export const setAuthenticatedUserAction = ({ payload }) => ({
   type: SET_INIT,
   payload: UserService().getUser({ user: payload }),
