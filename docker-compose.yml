@@ -19,12 +19,12 @@ services:
   comments:
     container_name: comments
     build:
-      context: ./api-server
+      context: ./api-server-comments
       dockerfile: Dockerfile
     ports:
       - "3001:3001"
     volumes:
-      - ./api-server:/app
+      - ./api-server-comments:/app
       - /app/node_modules
     restart: always
 
