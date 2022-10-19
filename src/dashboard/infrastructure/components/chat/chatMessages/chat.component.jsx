@@ -6,7 +6,7 @@ export const Chat = ({ getAllCommentsUseCase, commentsStore }) => {
   const [comments] = useComments({ getAllCommentsUseCase, commentsStore });
 
   return (
-    <StackMessages data={comments}>
+    <StackMessages data={comments} ariaLabel="chat">
       {(messageData) => <ChatMessage messageData={messageData}></ChatMessage>}
     </StackMessages>
   );

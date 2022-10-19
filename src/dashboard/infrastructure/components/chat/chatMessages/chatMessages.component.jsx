@@ -13,12 +13,16 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-export const StackMessages = ({ children: componentToRender, data }) => {
+export const StackMessages = ({
+  children: componentToRender,
+  data,
+  ariaLabel,
+}) => {
   if (!Array.isArray(data)) return null;
   if (data.length === 0) return null;
   if (!componentToRender) throw new Error();
   return (
-    <Box sx={{ width: "65%" }}>
+    <Box sx={{ width: "65%" }} aria-label={ariaLabel}>
       <Stack spacing={2}>
         {data.map((item) => (
           <div key={item.id}>{componentToRender(item)}</div>
