@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
@@ -9,11 +9,26 @@ import { Button, Typography } from "@mui/material";
 
 export const Following = ({ unfollowUserUseCase, usersStore }) => {
   const dispatch = useDispatch();
-  const authenticatedUser = useSelector(usersStore.selectAuthenticatedUser);
+  const authenticatedUser = useSelector(
+    usersStore.selectAuthenticatedUser,
+    shallowEqual
+  );
   const followingUsers = useSelector(
     usersStore.selectFollowingUsers,
     shallowEqual
   );
+
+  const ClickableButton = ({ children }) => {
+    const [toggleIsActive, setToggleIsActive] = useState(false);
+    return (
+      <ListItemButton
+        selected={toggleIsActive}
+        onClick={() => setToggleIsActive((p) => !p)}
+      >
+        {children}
+      </ListItemButton>
+    );
+  };
 
   return (
     <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
@@ -21,7 +36,7 @@ export const Following = ({ unfollowUserUseCase, usersStore }) => {
       <List component="nav" aria-label="main mailbox folders">
         {followingUsers.map((user) => (
           <div key={user.id}>
-            <ListItemButton selected onClick={(event) => {}}>
+            <ClickableButton>
               <ListItemText primary={user.name} />
               <Button
                 variant="contained"
@@ -36,7 +51,7 @@ export const Following = ({ unfollowUserUseCase, usersStore }) => {
               >
                 unfollow
               </Button>
-            </ListItemButton>
+            </ClickableButton>
             <Divider />
           </div>
         ))}

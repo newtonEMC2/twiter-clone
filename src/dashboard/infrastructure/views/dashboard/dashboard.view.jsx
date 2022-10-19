@@ -5,6 +5,10 @@ import { useComments } from "../../hooks/useComments";
 import { Following } from "../../components/following/following.component";
 import { Follow } from "../../components/follow/follow.component";
 import { useAuth } from "./useAuth";
+import {
+  StackMessages,
+  ChatMessage,
+} from "../../components/chatMessages/chatMessages.component";
 
 export const Dashboard =
   ({
@@ -21,7 +25,7 @@ export const Dashboard =
     const [comments] = useComments({ getAllCommentsUseCase, commentsStore });
 
     return (
-      <Grid container direction="column" style={{ height: "100vh" }}>
+      <Grid container direction="column" style={{ minHeight: "100vh" }}>
         <Grid xs item container>
           <Grid item xs={3} container direction="column">
             <Grid item xs>
@@ -38,7 +42,11 @@ export const Dashboard =
             </Grid>
           </Grid>
           <Grid item xs={9}>
-            {JSON.stringify(comments)}
+            <StackMessages data={comments}>
+              {(messageData) => (
+                <ChatMessage messageData={messageData}></ChatMessage>
+              )}
+            </StackMessages>
           </Grid>
         </Grid>
         <Grid item>
