@@ -2,6 +2,7 @@ import { CommentService } from "../../domain/comment/comment.service";
 
 const SET_COMMENTS = "SET_COMMENTS";
 const UPDATE_COMMENTS = "UPDATE_COMMENTS";
+const UPDATE_FILTERS = "UPDATE_FILTERS";
 
 export const setCommentsAction = ({ payload }) => ({
   type: SET_COMMENTS,
@@ -16,12 +17,25 @@ export const updateCommentsAction = ({ payload }) => ({
   }),
 });
 
-export const commentsReducer = (state = [], action) => {
+export const updateFiltersAction = ({ payload }) => ({
+  type: UPDATE_FILTERS,
+  payload,
+});
+
+export const commentsReducer = (
+  state = { collection: [], filters: {} },
+  action
+) => {
   switch (action.type) {
     case SET_COMMENTS:
-      return action.payload;
+      return { ...state, collection: action.payload };
     case UPDATE_COMMENTS:
-      return [...state, action.payload];
+      return { ...state, collection: [...state.collection, action.payload] };
+    case UPDATE_FILTERS:
+      return {
+        ...state,
+        filters: { ...state.filters, ...{ [action.payload]: true } },
+      };
     default:
       return state;
   }

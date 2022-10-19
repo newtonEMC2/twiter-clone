@@ -1,14 +1,10 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
 import { TimelineInput } from "../../components/timelineInput/timelineInput.component";
-import { useComments } from "../../hooks/useComments";
 import { Following } from "../../components/following/following.component";
 import { Follow } from "../../components/follow/follow.component";
 import { useAuth } from "./useAuth";
-import {
-  StackMessages,
-  ChatMessage,
-} from "../../components/chatMessages/chatMessages.component";
+import { Chat } from "../../components/chat/chatMessages/chat.component";
 
 export const Dashboard =
   ({
@@ -22,7 +18,6 @@ export const Dashboard =
   }) =>
   () => {
     useAuth({ useCase: getAuthenticatedUserUseCase, usersStore });
-    const [comments] = useComments({ getAllCommentsUseCase, commentsStore });
 
     return (
       <>
@@ -32,6 +27,7 @@ export const Dashboard =
               <Following
                 unfollowUserUseCase={unfollowUserUseCase}
                 usersStore={usersStore}
+                commentsStore={commentsStore}
               ></Following>
             </Grid>
             <Grid item xs>
@@ -42,11 +38,10 @@ export const Dashboard =
             </Grid>
           </Grid>
           <Grid item xs={9}>
-            <StackMessages data={comments}>
-              {(messageData) => (
-                <ChatMessage messageData={messageData}></ChatMessage>
-              )}
-            </StackMessages>
+            <Chat
+              getAllCommentsUseCase={getAllCommentsUseCase}
+              commentsStore={commentsStore}
+            ></Chat>
           </Grid>
         </Grid>
         <span style={{ position: "fixed", bottom: "1rem", right: "0.5rem" }}>

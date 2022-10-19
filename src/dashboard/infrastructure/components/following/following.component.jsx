@@ -7,7 +7,11 @@ import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
 import { Button, Typography } from "@mui/material";
 
-export const Following = ({ unfollowUserUseCase, usersStore }) => {
+export const Following = ({
+  unfollowUserUseCase,
+  usersStore,
+  commentsStore,
+}) => {
   const dispatch = useDispatch();
   const authenticatedUser = useSelector(
     usersStore.selectAuthenticatedUser,
@@ -18,12 +22,18 @@ export const Following = ({ unfollowUserUseCase, usersStore }) => {
     shallowEqual
   );
 
-  const ClickableButton = ({ children }) => {
+  const ClickableButton = ({ children, id }) => {
     const [toggleIsActive, setToggleIsActive] = useState(false);
     return (
       <ListItemButton
         selected={toggleIsActive}
-        onClick={() => setToggleIsActive((p) => !p)}
+        onClick={() =>
+          setToggleIsActive((p) => {
+            const isActive = !p;
+            if (isActive) dispatch(commentsStore.updateFilters({ id }));
+            return isActive;
+          })
+        }
       >
         {children}
       </ListItemButton>
@@ -36,7 +46,7 @@ export const Following = ({ unfollowUserUseCase, usersStore }) => {
       <List component="nav" aria-label="main mailbox folders">
         {followingUsers.map((user) => (
           <div key={user.id}>
-            <ClickableButton>
+            <ClickableButton id={user.id}>
               <ListItemText primary={user.name} />
               <Button
                 variant="contained"

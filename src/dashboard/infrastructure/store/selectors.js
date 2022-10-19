@@ -46,7 +46,7 @@ export const selectUsersToFollow = createDeepEqualUserToFollowSelector(
 
 //coments
 
-export const selectComments = (state) => state.comments;
+export const selectComments = (state) => state.comments.collection;
 
 export const selectCommentsFromFollowingUsers =
   createDeepEqualUserToFollowSelector(
