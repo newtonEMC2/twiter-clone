@@ -25,8 +25,8 @@ export const Dashboard =
     const [comments] = useComments({ getAllCommentsUseCase, commentsStore });
 
     return (
-      <Grid container direction="column" style={{ minHeight: "100vh" }}>
-        <Grid xs item container>
+      <>
+        <Grid container>
           <Grid item xs={3} container direction="column">
             <Grid item xs>
               <Following
@@ -49,11 +49,11 @@ export const Dashboard =
             </StackMessages>
           </Grid>
         </Grid>
-        <Grid item>
+        <span style={{ position: "fixed", bottom: "1rem", right: "0.5rem" }}>
           <TimelineInput
             createCommentUseCase={createCommentUseCase}
           ></TimelineInput>
-        </Grid>
-      </Grid>
+        </span>
+      </>
     );
   };

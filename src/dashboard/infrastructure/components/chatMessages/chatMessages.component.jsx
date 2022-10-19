@@ -18,7 +18,7 @@ export const StackMessages = ({ children: componentToRender, data }) => {
   if (data.length === 0) return null;
   if (!componentToRender) throw new Error();
   return (
-    <Box sx={{ width: "80%" }}>
+    <Box sx={{ width: "65%" }}>
       <Stack spacing={2}>
         {data.map((item) => (
           <div key={item.id}>{componentToRender(item)}</div>
