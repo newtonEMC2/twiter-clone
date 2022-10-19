@@ -2,6 +2,7 @@ import {
   setCommentsAction,
   updateCommentsAction,
   updateFiltersAction,
+  removeFiltersAction,
 } from "../../infrastructure/store/comments.slice";
 import {
   selectComments,
@@ -17,6 +18,9 @@ export const commentsStore = {
   },
   updateFilters: ({ id }) => {
     return updateFiltersAction({ payload: id });
+  },
+  removeFilters: ({ id }) => {
+    return removeFiltersAction({ payload: id });
   },
   selectComments,
   selectCommentsFromFollowingUsers,

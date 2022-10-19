@@ -3,8 +3,8 @@ import { usersRepository } from "../../domain/user/user.repository";
 import { setUsersAction } from "./users.slice";
 
 const SET_INIT = "SET_INIT";
-const FOLLOW_USER = "FOLLOW_USER";
-const UNFOLLOW_USER = "UNFOLLOW_USER";
+export const FOLLOW_USER = "FOLLOW_USER";
+export const UNFOLLOW_USER = "UNFOLLOW_USER";
 
 export const setAuthenticatedUserAction = ({ payload }) => ({
   type: SET_INIT,

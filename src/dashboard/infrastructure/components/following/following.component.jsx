@@ -31,6 +31,7 @@ export const Following = ({
           setToggleIsActive((p) => {
             const isActive = !p;
             if (isActive) dispatch(commentsStore.updateFilters({ id }));
+            else dispatch(commentsStore.removeFilters({ id }));
             return isActive;
           })
         }
@@ -51,13 +52,14 @@ export const Following = ({
               <Button
                 variant="contained"
                 size="small"
-                onClick={() =>
+                onClick={(e) => {
+                  e.stopPropagation();
                   unfollowUserUseCase({
                     userToUnfollow: user,
                     loggedInUser: authenticatedUser,
                     dispatch,
-                  })
-                }
+                  });
+                }}
               >
                 unfollow
               </Button>

@@ -47,12 +47,18 @@ export const selectUsersToFollow = createDeepEqualUserToFollowSelector(
 //coments
 
 export const selectComments = (state) => state.comments.collection;
+export const selectFilters = (state) => state.comments.filters;
 
 export const selectCommentsFromFollowingUsers =
   createDeepEqualUserToFollowSelector(
     selectAuthenticatedUser,
     selectComments,
-    (authenticatedUser, comments = []) => {
+    selectFilters,
+    (authenticatedUser, comments = [], filters = {}) => {
+      if (Object.keys(filters).length) {
+        return comments.filter((comment) => filters[comment.author.id]);
+      }
+
       const followingUsersIdsMap =
         authenticatedUser.following?.reduce((acc, current) => {
           acc[current] = true;
