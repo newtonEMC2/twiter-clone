@@ -2,7 +2,7 @@ import { USERS_SERVER_URI } from "../config";
 import { get, put } from "../../../shared/infrastructure/http/http";
 import { UserService } from "../../domain/user/user.service";
 
-const UsersRepository = {
+const UsersRepository = () => ({
   getUsers: async ({ authenticatedUserId }) => {
     try {
       let users = await get({
@@ -35,6 +35,6 @@ const UsersRepository = {
       console.log(error);
     }
   },
-};
+});
 
 export { UsersRepository };

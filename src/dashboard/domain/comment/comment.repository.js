@@ -2,9 +2,9 @@ import { CommentsRepository as cr } from "../../infrastructure/repositories/comm
 
 export const commentsRepository = {
   getAllComments: () => {
-    return cr.getAllComments();
+    return cr().getAllComments();
   },
   createComment: ({ content, author }) => {
-    return cr.createComment({ content, author });
+    return cr().createComment({ content, author });
   },
 };
