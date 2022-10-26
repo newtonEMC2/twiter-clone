@@ -12,7 +12,7 @@ import { followUserUseCase } from "./dashboard/application/user/followUserUseCas
 import { unfollowUserUseCase } from "./dashboard/application/user/unfollowUserUseCase";
 import { UserService } from "./dashboard/domain/user/user.service";
 
-const DashboardInstance = Dashboard({
+export const DashboardInstance = Dashboard({
   getAllCommentsUseCase: getAllCommentsUseCase({
     commentsRepository,
     commentsStore,
