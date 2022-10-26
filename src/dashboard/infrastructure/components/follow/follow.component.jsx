@@ -17,9 +17,12 @@ export const Follow = ({ followUserUseCase, usersStore }) => {
     useSelector(usersStore.selectUsersToFollow, shallowEqual) || [];
 
   return (
-    <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
+    <Box
+      aria-label="follow-users-section"
+      sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+    >
       <Typography variant="h6">follow</Typography>
-      <List component="nav" aria-label="main mailbox folders">
+      <List component="nav">
         {usersToFollow.map((user) => (
           <div key={user.id}>
             <ListItem>

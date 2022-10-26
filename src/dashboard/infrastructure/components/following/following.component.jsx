@@ -42,7 +42,10 @@ export const Following = ({
   };
 
   return (
-    <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
+    <Box
+      aria-label="following-users-section"
+      sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+    >
       <Typography variant="h6">following</Typography>
       <List component="nav" aria-label="main mailbox folders">
         {followingUsers.map((user) => (
