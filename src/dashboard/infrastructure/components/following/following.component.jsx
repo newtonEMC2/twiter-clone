@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
-import ListItemButton from "@mui/material/ListItemButton";
+import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
 import { Button, Typography } from "@mui/material";
@@ -25,8 +25,9 @@ export const Following = ({
   const ClickableButton = ({ children, id }) => {
     const [toggleIsActive, setToggleIsActive] = useState(false);
     return (
-      <ListItemButton
+      <ListItem
         selected={toggleIsActive}
+        style={{ backgroundColor: toggleIsActive ? "gray" : null }}
         onClick={() =>
           setToggleIsActive((p) => {
             const isActive = !p;
@@ -37,7 +38,7 @@ export const Following = ({
         }
       >
         {children}
-      </ListItemButton>
+      </ListItem>
     );
   };
 
