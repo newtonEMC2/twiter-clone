@@ -1,4 +1,4 @@
-import { render, screen, act } from "@testing-library/react";
+import { render, act } from "@testing-library/react";
 import { axe, toHaveNoViolations } from "jest-axe";
 import { CommentsRepositoryMock } from "../../../../../test/mocks/comments.repository.mock";
 import { UsersRepositoryMock } from "../../../../../test/mocks/users.repository.mock";

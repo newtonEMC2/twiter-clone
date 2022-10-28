@@ -22,10 +22,10 @@ export const Follow = ({ followUserUseCase, usersStore }) => {
       sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
     >
       <Typography variant="h6">follow</Typography>
-      <List component="nav">
+      <List component="ul">
         {usersToFollow.map((user) => (
-          <div key={user.id}>
-            <ListItem>
+          <li key={user.id}>
+            <ListItem component="div">
               <ListItemText primary={user.name} />
               <Button
                 variant="contained"
@@ -42,7 +42,7 @@ export const Follow = ({ followUserUseCase, usersStore }) => {
               </Button>
             </ListItem>
             <Divider />
-          </div>
+          </li>
         ))}
       </List>
     </Box>
