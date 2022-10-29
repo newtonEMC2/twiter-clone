@@ -28,7 +28,10 @@ export const Following = ({
       <ListItem
         component="div"
         selected={toggleIsActive}
-        style={{ backgroundColor: toggleIsActive ? "gray" : null }}
+        style={{
+          backgroundColor: toggleIsActive ? "gray" : null,
+          cursor: "pointer",
+        }}
         onClick={() =>
           setToggleIsActive((p) => {
             const isActive = !p;
