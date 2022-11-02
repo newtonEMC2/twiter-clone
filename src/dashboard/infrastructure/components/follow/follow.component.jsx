@@ -28,6 +28,7 @@ export const Follow = ({ followUserUseCase, usersStore }) => {
             <ListItem component="div">
               <ListItemText primary={user.name} />
               <Button
+                aria-label={`follow-${user.name}`}
                 variant="contained"
                 size="small"
                 onClick={() =>

@@ -23,18 +23,16 @@ describe("dashboard", () => {
       render(withRedux(DashboardInstance)(store()));
 
       let followSection = screen.getByLabelText("follow-users-section");
-      let userName = await within(followSection).findByText("Veronica");
+      let userName = await within(followSection).findByText("Marta");
       expect(userName).toBeInTheDocument();
 
-      const userToFollowButton = within(followSection).getByRole("button", {
-        name: "follow",
-      });
+      const userToFollowButton =
+        within(followSection).getByLabelText("follow-Marta");
       await act(async () => {
         fireEvent.click(userToFollowButton);
       });
 
-      followSection = await screen.findByLabelText("follow-users-section");
-      userName = within(followSection).queryByText("Veronica");
+      userName = within(followSection).queryByText("Marta");
       expect(userName).not.toBeInTheDocument();
     });
 
@@ -44,12 +42,11 @@ describe("dashboard", () => {
       render(withRedux(DashboardInstance)(store()));
 
       let followSection = screen.getByLabelText("follow-users-section");
-      let userName = await within(followSection).findByText("Veronica");
+      let userName = await within(followSection).findByText("Marta");
       expect(userName).toBeInTheDocument();
 
-      const userToFollowButton = within(followSection).getByRole("button", {
-        name: "follow",
-      });
+      const userToFollowButton =
+        within(followSection).getByLabelText("follow-Marta");
       await act(async () => {
         fireEvent.click(userToFollowButton);
       });
@@ -57,7 +54,7 @@ describe("dashboard", () => {
       const followingSection = await screen.findByLabelText(
         "following-users-section"
       );
-      userName = await within(followingSection).findByText("Veronica");
+      userName = await within(followingSection).findByText("Marta");
       expect(userName).toBeInTheDocument();
     });
   });
@@ -74,7 +71,7 @@ describe("dashboard", () => {
 
       const userToUnfollowButton = within(followingSection).getByRole(
         "button",
-        { name: "unfollow" }
+        { name: "unfollow-Jose" }
       );
       await act(async () => {
         fireEvent.click(userToUnfollowButton);
@@ -92,18 +89,21 @@ describe("dashboard", () => {
       CommentsRepository.mockImplementation(CommentsRepositoryMock);
       render(withRedux(DashboardInstance)(store()));
 
+      //check user is in following list
       let followingSection = screen.getByLabelText("following-users-section");
       let userName = await within(followingSection).findByText("Jose");
       expect(userName).toBeInTheDocument();
 
+      // unfollow user
       const userToUnfollowButton = within(followingSection).getByRole(
         "button",
-        { name: "unfollow" }
+        { name: "unfollow-Jose" }
       );
       await act(async () => {
         fireEvent.click(userToUnfollowButton);
       });
 
+      // make sure the user is on `follow` section
       const followSection = screen.getByLabelText("follow-users-section");
       userName = within(followSection).queryByText("Jose");
       expect(userName).toBeInTheDocument();
@@ -125,7 +125,7 @@ describe("dashboard", () => {
         fireEvent.click(submitButton);
       });
 
-      const chatBox = screen.getByLabelText("chat");
+      const chatBox = screen.getByLabelText("chat-list");
 
       expect(within(chatBox).getByText("::mycomment::")).toBeInTheDocument();
     });
@@ -173,10 +173,30 @@ describe("dashboard", () => {
 
   describe("when chat comments are filtered by user", () => {
     describe("And when just one user is selected", () => {
-      it("should show chats with just this user as author", () => {
+      it("should show chats with just this user as author", async () => {
         UsersRepository.mockImplementation(UsersRepositoryMock);
         CommentsRepository.mockImplementation(CommentsRepositoryMock);
         render(withRedux(DashboardInstance)(store()));
+
+        const clickableList = screen.getByRole("list", {
+          name: "following-users-list",
+        });
+        const clickableListItems = await within(clickableList).findAllByRole(
+          "listitem"
+        );
+        const clickableListItem = clickableListItems.find((item) =>
+          /jose/i.test(item.textContent)
+        );
+
+        await act(async () => {
+          fireEvent.click(clickableListItem);
+        });
+
+        const chatList = screen.getByRole("list", { name: "chat-list" });
+        const chatListItems = await within(chatList).findAllByRole("listitem");
+        chatListItems.forEach((item) =>
+          expect(item.textContent).toMatch(/jose/i)
+        );
       });
     });
   });

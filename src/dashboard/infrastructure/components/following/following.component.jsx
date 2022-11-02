@@ -26,7 +26,7 @@ export const Following = ({
     const [toggleIsActive, setToggleIsActive] = useState(false);
     return (
       <ListItem
-        component="div"
+        component="li"
         selected={toggleIsActive}
         style={{
           backgroundColor: toggleIsActive ? "gray" : null,
@@ -52,12 +52,13 @@ export const Following = ({
       sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
     >
       <Typography variant="h6">following</Typography>
-      <List component="ul" aria-label="main mailbox folders">
+      <List component="ul" aria-label="following-users-list">
         {followingUsers.map((user) => (
-          <li key={user.id}>
-            <ClickableButton id={user.id}>
+          <>
+            <ClickableButton key={user.id} id={user.id} name={user.name}>
               <ListItemText primary={user.name} />
               <Button
+                aria-label={`unfollow-${user.name}`}
                 variant="contained"
                 size="small"
                 onClick={(e) => {
@@ -73,7 +74,7 @@ export const Following = ({
               </Button>
             </ClickableButton>
             <Divider />
-          </li>
+          </>
         ))}
       </List>
     </Box>

@@ -22,10 +22,10 @@ export const StackMessages = ({
   if (data.length === 0) return null;
   if (!componentToRender) throw new Error();
   return (
-    <Box sx={{ width: "65%" }} aria-label={ariaLabel}>
-      <Stack spacing={2}>
+    <Box sx={{ width: "65%" }}>
+      <Stack component="ul" spacing={2} aria-label={ariaLabel}>
         {data.map((item) => (
-          <div key={item.id}>{componentToRender(item)}</div>
+          <li key={item.id}>{componentToRender(item)}</li>
         ))}
       </Stack>
     </Box>

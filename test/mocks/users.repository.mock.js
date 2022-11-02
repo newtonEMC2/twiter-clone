@@ -5,7 +5,10 @@ const UsersRepositoryMock = () => {
     {
       id: "9b1deb4d-3b7d-4bad-9bdd-2b0d7b300001",
       name: "Alexis",
-      following: ["9b13234d-hr76-4bad-9bdd-2b0d7b300119"],
+      following: [
+        "9b13234d-hr76-4bad-9bdd-2b0d7b300119",
+        "9b13234d-hr76-4bad-9bdd-2b0d7boiuet7",
+      ],
     },
     {
       id: "9b13234d-3b7d-4bad-9bdd-2b0d7b300099",
@@ -25,6 +28,11 @@ const UsersRepositoryMock = () => {
     {
       id: "9b13234d-hr76-4bad-9bdd-2b0d7b300777",
       name: "Elena",
+      following: [],
+    },
+    {
+      id: "9b13234d-hr76-4bad-9bdd-2b0d7boiuet7",
+      name: "Paquita",
       following: [],
     },
   ];

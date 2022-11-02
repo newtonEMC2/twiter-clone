@@ -39,6 +39,15 @@ const CommentsRepositoryMock = () => {
       date: 1666086904171,
       content: "1st message from Elena",
     },
+    {
+      id: "9b13234d-3b7d-4bad-9bdd-2b0d7b3yoyoi",
+      author: {
+        id: "9b13234d-hr76-4bad-9bdd-2b0d7b300119",
+        name: "Jose",
+      },
+      date: 1666086904171,
+      content: "1st message from Jose",
+    },
   ];
 
   return {
